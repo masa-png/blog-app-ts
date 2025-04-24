@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { Post } from "../types";
 
 export default function Home() {
-  const [posts, setPosts] = useState<Post[] | null>([]);
+  const [posts, setPosts] = useState<Post[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
 
   // APIでpostsを取得する処理をuseEffectで実行
@@ -23,14 +23,14 @@ export default function Home() {
 
   if (loading) return <p>読み込み中...</p>;
 
-  if (!loading && posts?.length === 0) return <p>投稿がみつかりませんでした</p>;
+  if (!loading && posts.length === 0) return <p>投稿がみつかりませんでした</p>;
 
   return (
     <div>
       <div className="max-w-3xl mx-auto my-10 px-4">
         <ul>
           {/* ブログの記事をループして表示 */}
-          {posts?.map((post: Post) => {
+          {posts.map((post: Post) => {
             return (
               <li key={post.id} className="flex flex-col list-none m-0 p-0">
                 <Link to={`posts/${post.id}`} className="block bg-white">
